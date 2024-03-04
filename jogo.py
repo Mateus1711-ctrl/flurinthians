@@ -4,6 +4,12 @@ def inicializa():
     pygame.init()
     tela = pygame.display.set_mode((1000, 700))
     pygame.display.set_caption('jogo Artur e Matheus')
+    assets = {}
+    lista1 = []
+    lista2 = []
+    lista3 = []
+    lista4 = []
+    
     return tela
 
 game = True
