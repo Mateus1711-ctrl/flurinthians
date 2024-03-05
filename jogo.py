@@ -30,7 +30,12 @@ qtd_bau=0
 qtd_chave=0
 qtd_raio=0
 qtd_maca=0
-        
+lista=[]
+lista_pocao=[]     
+lista_bau=[]
+lista_chave=[]
+lista_raio=[]
+lista_maca=[]   
 def desenha(tela,assets):
     tela.fill((255, 255, 255))
     fundo=assets['fundo']
@@ -41,7 +46,12 @@ def desenha(tela,assets):
     chave=assets['chave']
     raio=assets['raio']
     maca=assets['maca']
-
+    global lista
+    global lista_pocao
+    global lista_bau
+    global lista_chave
+    global lista_raio
+    global lista_maca
     global vida
     global qtd_pocao
     global qtd_bau
@@ -57,17 +67,41 @@ def desenha(tela,assets):
     #desenhar imagens abaixo (vou fazer um loop ultilizando aquele sorteio do assets,assim sorteio a quantidade de imagens,e adicionar elas a uma lista respectiva)
     global primeira #coloquei essa variavel para so passar pelo sorteio da quantidade de imagens,uma vez apenas
     if primeira:
-        qtd_pocao=random.randint(0,10)
-        qtd_bau=random.randint(0,10)
-        qtd_chave=random.randint(0,10)
-        qtd_raio=random.randint(0,10)
-        qtd_maca=random.randint(0,10)
-        
+        qtd_pocao=random.randint(1,6)
+        qtd_bau=random.randint(1,6)
+        qtd_chave=random.randint(1,6)
+        qtd_raio=random.randint(1,6)
+        qtd_maca=random.randint(1,6)
+        lista_pocao = []
+        for n in range(qtd_pocao):
+            lista=[]
+            x_pocao = random.randint(50,950)
+            y_pocao = random.randint(50,650)
+            lista.append(x_pocao)
+            lista.append(y_pocao)
+            lista_pocao.append(lista)
+    
+        for n in range(qtd_bau):
+            lista=[]
+            x_bau = random.randint(50,950)
+            y_bau = random.randint(50,650)
+            lista.append(x_bau)
+            lista.append(y_bau)
+            lista_bau.append(lista)
+        for n in range(qtd_chave):
+            lista=[]
+            x_qtd_chave = random.randint(50,950)
+            y_qtd_chave = random.randint(50,650)
+            lista.append(x_qtd_chave)
+            lista.append(y_qtd_chave)
+            lista_chave.append(lista)
     #desenha pocao
-    x_pocao=50
-    y_pocao=20
+    
     for i in range(qtd_pocao): 
-        tela.blit(pocao,(x_pocao,y_pocao))
+        tela.blit(pocao,(lista_pocao[i][0],lista_pocao[i][1]))
+       
+    for i in range(qtd_bau): 
+        tela.blit(bau,(lista_bau[i][0],lista_bau[i][1]))
        
 
     pygame.display.update()
