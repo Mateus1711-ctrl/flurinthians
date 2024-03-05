@@ -39,7 +39,10 @@ lista_pocao=[]
 lista_bau=[]
 lista_chave=[]
 lista_raio=[]
-lista_maca=[]   
+lista_maca=[]
+posicoes=[] 
+loop=0  
+
 def desenha(tela,assets):
     tela.fill((255, 255, 255))
     fundo=assets['fundo']
@@ -50,6 +53,7 @@ def desenha(tela,assets):
     chave=assets['chave']
     raio=assets['raio']
     maca=assets['maca']
+    global posicoes
     global lista
     global lista_pocao
     global lista_bau
@@ -62,6 +66,7 @@ def desenha(tela,assets):
     global qtd_chave
     global qtd_raio
     global qtd_maca
+
     x=10
    
         
@@ -70,21 +75,40 @@ def desenha(tela,assets):
         x+=50
     #desenhar imagens abaixo (vou fazer um loop ultilizando aquele sorteio do assets,assim sorteio a quantidade de imagens,e adicionar elas a uma lista respectiva)
     global primeira #coloquei essa variavel para so passar pelo sorteio da quantidade de imagens,uma vez apenas
+    
     if primeira:
-        qtd_pocao=random.randint(1,6)
-        qtd_bau=random.randint(1,6)
-        qtd_chave=random.randint(1,6)
-        qtd_raio=random.randint(1,6)
-        qtd_maca=random.randint(1,6)
+        if loop==0:
+            qtd_chave=random.randint(5,10)
+        elif loop==1:
+            print('tela2')  
+            
+        elif loop==2:
+            qtd_chave=random.randint(5,10)
+            qtd_raio=random.randint(5,10)
+            qtd_maca=random.randint(5,10)    
+        elif loop==4:
+            qtd_pocao=random.randint(5,10)
+            qtd_bau=random.randint(5,10)
+            qtd_chave=random.randint(5,10)
+            qtd_raio=random.randint(5,10)
+            qtd_maca=random.randint(5,10)
+
+        
+        
+
+
         lista_pocao = []
+        
         for n in range(qtd_pocao):
             lista=[]
             x_pocao = random.randint(50,950)
             y_pocao = random.randint(50,600)
             lista.append(x_pocao)
             lista.append(y_pocao)
-            if lista not in lista_bau or lista_chave or  lista_maca or  lista_raio or  lista_maca:
+            if lista not in posicoes:
                 lista_pocao.append(lista)
+                posicoes.append(lista)
+                posicoes.append(lista)        
     
         for n in range(qtd_bau):
             lista=[]
@@ -92,58 +116,67 @@ def desenha(tela,assets):
             y_bau = random.randint(50,600)
             lista.append(x_bau)
             lista.append(y_bau)
-            if lista not in lista_bau or not lista_chave or not lista_maca or not lista_raio or not lista_maca:
+            if lista not in posicoes:
                 lista_bau.append(lista)
+                posicoes.append(lista)
         for n in range(qtd_chave):
             lista=[]
             x_qtd_chave = random.randint(50,950)
             y_qtd_chave = random.randint(50,600)
             lista.append(x_qtd_chave)
             lista.append(y_qtd_chave)
-            if lista not in lista_bau or not lista_chave or not lista_maca or not lista_raio or not lista_maca:
+            if lista not in posicoes:
                 lista_chave.append(lista)
+                posicoes.append(lista)
         for n in range(qtd_raio):
             lista=[]
             x_qtd_raio = random.randint(50,950)
             y_qtd_raio = random.randint(50,600)
             lista.append(x_qtd_raio)
             lista.append(y_qtd_raio)
-            if lista not in lista_bau or not lista_chave or not lista_maca or not lista_raio or not lista_maca:
+            if lista not in posicoes:
                 lista_raio.append(lista)
+                posicoes.append(lista)
         for n in range(qtd_maca):
             lista=[]
             x_qtd_maca = random.randint(50,950)
             y_qtd_maca = random.randint(50,600)
             lista.append(x_qtd_maca)
             lista.append(y_qtd_maca)
-            if lista not in lista_bau or not lista_chave or not lista_maca or not lista_raio or not lista_maca:
+            if lista not in posicoes:
                 lista_maca.append(lista)
+                posicoes.append(lista)
     #desenha pocao
-    
-    for i in range(qtd_pocao): 
-        tela.blit(pocao,(lista_pocao[i][0],lista_pocao[i][1]))
+    if loop%2==0:
+        for i in range(qtd_pocao): 
+            tela.blit(pocao,(lista_pocao[i][0],lista_pocao[i][1]))
        
-    for i in range(qtd_bau): 
-        tela.blit(bau,(lista_bau[i][0],lista_bau[i][1]))
+        for i in range(qtd_bau): 
+            tela.blit(bau,(lista_bau[i][0],lista_bau[i][1]))
     
-    for i in range(qtd_chave): 
-        tela.blit(chave,(lista_chave[i][0],lista_chave[i][1]))
-    for i in range(qtd_raio): 
-        tela.blit(raio,(lista_raio[i][0],lista_raio[i][1]))
-    for i in range(qtd_maca): 
-        tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
-       
-
+        for i in range(qtd_chave): 
+            tela.blit(chave,(lista_chave[i][0],lista_chave[i][1]))
+        for i in range(qtd_raio): 
+            tela.blit(raio,(lista_raio[i][0],lista_raio[i][1]))
+        for i in range(qtd_maca): 
+            tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
+        print('entrou')
+    else:
+        pass
     pygame.display.update()
     primeira=False
 def game_loop(tela,assets):
     global vida
+    global loop
+    global primeira
     while game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type==pygame.MOUSEBUTTONDOWN:
                 vida-=1    
+                loop+=1
+                primeira=True
         desenha(tela,assets)
 
 if __name__ == '__main__':
