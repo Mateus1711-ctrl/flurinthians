@@ -10,9 +10,13 @@ def inicializa():
     assets['pocao']= pygame.image.load('fotos_pygame/pocao.png')
     assets['pocao']=pygame.transform.scale(assets['pocao'],(50,50))
     assets['bau'] = pygame.image.load('fotos_pygame/bau.png')
+    assets['bau']=pygame.transform.scale(assets['bau'],(50,50))
     assets['chave'] = pygame.image.load('fotos_pygame/chave.png')
+    assets['chave']=pygame.transform.scale(assets['chave'],(50,50))
     assets['raio'] = pygame.image.load('fotos_pygame/raio.png')
+    assets['raio']=pygame.transform.scale(assets['raio'],(50,50))
     assets['maca'] = pygame.image.load('fotos_pygame/maca.png')
+    assets['maca']=pygame.transform.scale(assets['maca'],(50,50))
     fundo= pygame.image.load('fotos_pygame/fundo.png')
     assets['fundo']=pygame.transform.scale(fundo,(1000,700))
     assets['vida']=3
@@ -95,6 +99,20 @@ def desenha(tela,assets):
             lista.append(x_qtd_chave)
             lista.append(y_qtd_chave)
             lista_chave.append(lista)
+        for n in range(qtd_raio):
+            lista=[]
+            x_qtd_raio = random.randint(50,950)
+            y_qtd_raio = random.randint(50,650)
+            lista.append(x_qtd_raio)
+            lista.append(y_qtd_raio)
+            lista_raio.append(lista)
+        for n in range(qtd_maca):
+            lista=[]
+            x_qtd_maca = random.randint(50,950)
+            y_qtd_maca = random.randint(50,650)
+            lista.append(x_qtd_maca)
+            lista.append(y_qtd_maca)
+            lista_maca.append(lista)
     #desenha pocao
     
     for i in range(qtd_pocao): 
@@ -102,6 +120,13 @@ def desenha(tela,assets):
        
     for i in range(qtd_bau): 
         tela.blit(bau,(lista_bau[i][0],lista_bau[i][1]))
+    
+    for i in range(qtd_chave): 
+        tela.blit(chave,(lista_chave[i][0],lista_chave[i][1]))
+    for i in range(qtd_raio): 
+        tela.blit(raio,(lista_raio[i][0],lista_raio[i][1]))
+    for i in range(qtd_maca): 
+        tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
        
 
     pygame.display.update()
