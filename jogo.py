@@ -25,6 +25,12 @@ game = True
 
 vida=3
 primeira=True
+qtd_pocao=0
+qtd_bau=0
+qtd_chave=0
+qtd_raio=0
+qtd_maca=0
+        
 def desenha(tela,assets):
     tela.fill((255, 255, 255))
     fundo=assets['fundo']
@@ -35,9 +41,15 @@ def desenha(tela,assets):
     chave=assets['chave']
     raio=assets['raio']
     maca=assets['maca']
-
-    x=10
     global vida
+    global qtd_pocao
+    global qtd_bau
+    global qtd_chave
+    global qtd_raio
+    global qtd_maca
+    x=10
+   
+        
     for i in range(vida):
         tela.blit(coracao,(x,630))
         x+=50
@@ -47,12 +59,12 @@ def desenha(tela,assets):
         qtd_pocao=random.randint(0,10)
         qtd_bau=random.randint(0,10)
         qtd_chave=random.randint(0,10)
-        qtd_raio=random.ranint(0,10)
+        qtd_raio=random.randint(0,10)
         qtd_maca=random.randint(0,10)
         
     #desenha pocao
     for i in range(qtd_pocao):   
-        tela.blit()     
+        tela.blit(pocao,(100,100))     
 
     pygame.display.update()
     primeira=False
