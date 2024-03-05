@@ -7,7 +7,8 @@ def inicializa():
     assets = {}
     coracao= pygame.image.load('fotos_pygame/coracao.png')
     assets['coracao'] =pygame.transform.scale(coracao,(50,70))
-    assets['pocao'] = pygame.image.load('fotos_pygame/pocao.png')
+    assets['pocao']= pygame.image.load('fotos_pygame/pocao.png')
+    assets['pocao']=pygame.transform.scale(assets['pocao'],(50,50))
     assets['bau'] = pygame.image.load('fotos_pygame/bau.png')
     assets['chave'] = pygame.image.load('fotos_pygame/chave.png')
     assets['raio'] = pygame.image.load('fotos_pygame/raio.png')
@@ -21,7 +22,6 @@ def inicializa():
     return tela, assets
 
 game = True
-
 
 vida=3
 primeira=True
@@ -41,6 +41,7 @@ def desenha(tela,assets):
     chave=assets['chave']
     raio=assets['raio']
     maca=assets['maca']
+
     global vida
     global qtd_pocao
     global qtd_bau
@@ -63,8 +64,11 @@ def desenha(tela,assets):
         qtd_maca=random.randint(0,10)
         
     #desenha pocao
-    for i in range(qtd_pocao):   
-        tela.blit(pocao,(100,100))     
+    x_pocao=50
+    y_pocao=20
+    for i in range(qtd_pocao): 
+        tela.blit(pocao,(x_pocao,y_pocao))
+       
 
     pygame.display.update()
     primeira=False
