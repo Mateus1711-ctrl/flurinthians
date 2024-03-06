@@ -91,16 +91,17 @@ def desenha(tela,assets):
         elif loop==2:
             qtd_chave=random.randint(5,10)
             qtd_raio=random.randint(5,10)
-            qtd_maca=random.randint(5,10)    
+            qtd_maca=random.randint(5,10) 
+        elif loop==3:
+            print('tela4')
         elif loop==4:
             qtd_pocao=random.randint(5,10)
             qtd_bau=random.randint(5,10)
             qtd_chave=random.randint(5,10)
             qtd_raio=random.randint(5,10)
             qtd_maca=random.randint(5,10)
-
-        
-        
+        elif loop==5:
+            print('tela6')   
 
 
         lista_pocao = []
