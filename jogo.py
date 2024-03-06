@@ -42,8 +42,13 @@ lista_raio=[]
 lista_maca=[]
 posicoes=[] 
 loop=0  
+texto=''
+passou=False
+
 
 def desenha(tela,assets):
+    fonte=pygame.font.SysFont(None,100)
+
     tela.fill((255, 255, 255))
     fundo=assets['fundo']
     tela.blit(fundo,(0,0))
@@ -66,7 +71,8 @@ def desenha(tela,assets):
     global qtd_chave
     global qtd_raio
     global qtd_maca
-
+    global texto
+    global passou 
     x=10
    
         
@@ -81,7 +87,7 @@ def desenha(tela,assets):
             qtd_chave=random.randint(5,10)
         elif loop==1:
             print('tela2')  
-            
+            passou=False
         elif loop==2:
             qtd_chave=random.randint(5,10)
             qtd_raio=random.randint(5,10)
@@ -160,23 +166,54 @@ def desenha(tela,assets):
             tela.blit(raio,(lista_raio[i][0],lista_raio[i][1]))
         for i in range(qtd_maca): 
             tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
-        print('entrou')
+        texto=''
     else:
-        pass
+        tex=fonte.render(texto,True,(0,0,0))
+        tela.blit(tex,(500,350))
+        
     pygame.display.update()
     primeira=False
+
 def game_loop(tela,assets):
     global vida
     global loop
     global primeira
+    global texto
+    global lista_chave
+    global passou
     while game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type==pygame.MOUSEBUTTONDOWN:
-                vida-=1    
+                  
                 loop+=1
                 primeira=True
+            elif event.type==pygame.KEYDOWN:
+                
+                texto+=event.unicode
+                if passou:
+                    primeira=True    
+                if int(texto)==(len(lista_chave)/2):
+                    passou=True
+                    
+                if event.key==pygame.K_RETURN:
+                    if passou==True:
+                        print('foi')
+                        loop+=1
+                        print(loop)
+                        primeira=True
+                        
+                    else:
+                        print("errou")
+                        loop+=1
+                        print(loop)
+                        vida-=1  
+                        primeira=True
+                    
+         
+                    
+                        
         desenha(tela,assets)
 
 if __name__ == '__main__':
