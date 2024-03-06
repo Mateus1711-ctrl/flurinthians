@@ -103,69 +103,89 @@ def desenha(tela,assets):
         elif loop==5:
             print('tela6')   
 
-
-        lista_pocao = []
-        
-        for n in range(qtd_pocao):
-            lista=[]
-            x_pocao = random.randint(50,950)
-            y_pocao = random.randint(50,600)
-            lista.append(x_pocao)
-            lista.append(y_pocao)
-            if lista not in posicoes:
-                lista_pocao.append(lista)
-                posicoes.append(lista)
-                posicoes.append(lista)        
-    
-        for n in range(qtd_bau):
-            lista=[]
-            x_bau = random.randint(50,950)
-            y_bau = random.randint(50,600)
-            lista.append(x_bau)
-            lista.append(y_bau)
-            if lista not in posicoes:
-                lista_bau.append(lista)
-                posicoes.append(lista)
-        for n in range(qtd_chave):
-            lista=[]
-            x_qtd_chave = random.randint(50,950)
-            y_qtd_chave = random.randint(50,600)
-            lista.append(x_qtd_chave)
-            lista.append(y_qtd_chave)
-            if lista not in posicoes:
-                lista_chave.append(lista)
-                posicoes.append(lista)
-        for n in range(qtd_raio):
-            lista=[]
-            x_qtd_raio = random.randint(50,950)
-            y_qtd_raio = random.randint(50,600)
-            lista.append(x_qtd_raio)
-            lista.append(y_qtd_raio)
-            if lista not in posicoes:
-                lista_raio.append(lista)
-                posicoes.append(lista)
-        for n in range(qtd_maca):
-            lista=[]
-            x_qtd_maca = random.randint(50,950)
-            y_qtd_maca = random.randint(50,600)
-            lista.append(x_qtd_maca)
-            lista.append(y_qtd_maca)
-            if lista not in posicoes:
-                lista_maca.append(lista)
-                posicoes.append(lista)
+        if loop%2==0:
+            lista_pocao = []
+            
+            for n in range(qtd_pocao):
+                if n%2==0:
+                    print('P')
+                    lista=[]
+                x_pocao = random.randint(50,950)
+                y_pocao = random.randint(50,600)
+                lista.append(x_pocao)
+                lista.append(y_pocao)
+                if n%2!=0:
+                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
+                        lista_pocao.append(lista)
+                        posicoes.append(lista)
+            for n in range(qtd_bau):
+                if n%2==0:
+                    print('P')
+                    lista=[]
+                x_bau = random.randint(50,950)
+                y_bau = random.randint(50,600)
+                lista.append(x_bau)
+                lista.append(y_bau)
+                if n%2!=0:
+                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
+                        lista_bau.append(lista)
+                        posicoes.append(lista)
+                    
+            for n in range(qtd_chave*2):
+                if n%2==0:
+                    print('P')
+                    lista=[]
+                x_qtd_chave = random.randint(50,950)
+                y_qtd_chave = random.randint(50,600)
+                lista.append(x_qtd_chave)
+                lista.append(y_qtd_chave) 
+                
+                if n%2!=0:
+                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
+                        lista_chave.append(lista)
+                        posicoes.append(lista)
+                
+        #desenha pocao 
+                        
+            for n in range(qtd_raio):
+                if n%2==0:
+                    print('P')
+                    lista=[]
+                x_qtd_raio = random.randint(50,950)
+                y_qtd_raio = random.randint(50,600)
+                lista.append(x_qtd_raio)
+                lista.append(y_qtd_raio)
+                if n%2!=0:
+                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
+                        lista_raio.append(lista)
+                        posicoes.append(lista)
+                
+            for n in range(qtd_maca):
+                if n%2==0:
+                    print('P')
+                    lista=[]
+                x_qtd_maca = random.randint(50,950)
+                y_qtd_maca = random.randint(50,600)
+                lista.append(x_qtd_maca)
+                lista.append(y_qtd_maca)
+                if n%2!=0:
+                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
+                        lista_maca.append(lista)
+                        posicoes.append(lista)
+                
     #desenha pocao
     if loop%2==0:
-        for i in range(qtd_pocao): 
+        for i in range(len(lista_pocao)): 
             tela.blit(pocao,(lista_pocao[i][0],lista_pocao[i][1]))
        
-        for i in range(qtd_bau): 
+        for i in range(len(lista_bau)): 
             tela.blit(bau,(lista_bau[i][0],lista_bau[i][1]))
     
-        for i in range(qtd_chave): 
+        for i in range(len(lista_chave)): 
             tela.blit(chave,(lista_chave[i][0],lista_chave[i][1]))
-        for i in range(qtd_raio): 
+        for i in range(len(lista_raio)): 
             tela.blit(raio,(lista_raio[i][0],lista_raio[i][1]))
-        for i in range(qtd_maca): 
+        for i in range(len(lista_maca)): 
             tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
         texto=''
     else:
@@ -184,31 +204,34 @@ def game_loop(tela,assets):
     global passou
     while game:
         for event in pygame.event.get():
+            print(len(lista_chave))  
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type==pygame.MOUSEBUTTONDOWN:
                   
                 loop+=1
                 primeira=True
+              
             elif event.type==pygame.KEYDOWN:
                 
                 texto+=event.unicode
+                
                 if passou:
                     primeira=True    
-                if int(texto)==(len(lista_chave)/2):
+                if int(texto)==(len(lista_chave)):
                     passou=True
                     
                 if event.key==pygame.K_RETURN:
                     if passou==True:
                         print('foi')
                         loop+=1
-                        print(loop)
+            
                         primeira=True
                         
                     else:
-                        print("errou")
+                        print("nao foi")
                         loop+=1
-                        print(loop)
+                      
                         vida-=1  
                         primeira=True
                     
