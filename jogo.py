@@ -194,7 +194,8 @@ def desenha(tela,assets):
         texto=''
     else:
         tex=fonte.render(texto,True,(0,0,0))
-        tela.blit(tex,(500,350))
+        tela.blit(tex,(480,320))
+        pygame.draw.rect(tela,(0,0,255),(300,300,400,100),2)
         
     pygame.display.update()
     primeira=False
@@ -213,7 +214,11 @@ def game_loop(tela,assets):
                 ultimo_update = agora  
               
             elif event.type == pygame.KEYDOWN:
-                texto += event.unicode
+                
+                if event.key == pygame.K_BACKSPACE:
+                    texto = texto[:-1]
+                else:
+                    texto += event.unicode
                 
                 if passou:
                     primeira = True    
