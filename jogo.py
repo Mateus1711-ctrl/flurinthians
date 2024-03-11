@@ -44,6 +44,7 @@ posicoes=[]
 loop=0  
 texto=''
 passou=False
+ultimo_update = pygame.time.get_ticks()
 
 
 def desenha(tela,assets):
@@ -73,6 +74,7 @@ def desenha(tela,assets):
     global qtd_maca
     global texto
     global passou 
+
     x=10
    
         
@@ -198,49 +200,50 @@ def desenha(tela,assets):
     primeira=False
 
 def game_loop(tela,assets):
-    global vida
-    global loop
-    global primeira
-    global texto
-    global lista_chave
-    global passou
+    global vida, loop, primeira, texto, lista_chave, passou, ultimo_update
     while game:
+        agora = pygame.time.get_ticks()  # Pega o tempo atual do jogo
         for event in pygame.event.get():
             print(len(lista_chave))  
             if event.type == pygame.QUIT:
                 pygame.quit()
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                  
-                loop+=1
-                primeira=True
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                loop += 1
+                primeira = True
+                ultimo_update = agora  
               
-            elif event.type==pygame.KEYDOWN:
-                
-                texto+=event.unicode
+            elif event.type == pygame.KEYDOWN:
+                texto += event.unicode
                 
                 if passou:
-                    primeira=True    
-                if int(texto)==(len(lista_chave)):
-                    passou=True
+                    primeira = True    
+                if texto.isdigit() and int(texto) == len(lista_chave):  
+                    passou = True
                     
-                if event.key==pygame.K_RETURN:
-                    if passou==True:
+                if event.key == pygame.K_RETURN:
+                    if passou == True:
                         print('foi')
-                        loop+=1
-            
-                        primeira=True
-                        
+                        loop += 1
+                        texto = '' 
+                        primeira = True
+                        passou = False  
+                        ultimo_update = agora 
                     else:
-                        print("nao foi")
-                        loop+=1
-                      
-                        vida-=1  
-                        primeira=True
+                        print("não foi")
+                        loop += 1
+                        texto = '' 
+                        vida -= 1  
+                        primeira = True
+                        ultimo_update = agora 
+                
+       
+        if loop % 2 == 0 and (agora - ultimo_update) >= 4000:  
+            loop += 1
+            primeira = True
+            ultimo_update = agora  
                     
-         
-                    
-                        
-        desenha(tela,assets)
+        desenha(tela, assets)
+
 
 if __name__ == '__main__':
     tela,assets= inicializa()
