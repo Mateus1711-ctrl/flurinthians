@@ -84,7 +84,7 @@ def desenha(tela,assets):
     
     if primeira:
         if loop==0:
-            qtd_chave=random.randint(5,10)
+            qtd_chave=random.randint(15,20)
         elif loop==1:
             print('tela2')  
             passou=False
@@ -104,74 +104,76 @@ def desenha(tela,assets):
             print('tela6')   
 
         if loop%2==0:
-            lista_pocao = []
             
             for n in range(qtd_pocao):
-                if n%2==0:
-                    print('P')
-                    lista=[]
+                
+                lista=[]
                 x_pocao = random.randint(50,950)
                 y_pocao = random.randint(50,600)
-                lista.append(x_pocao)
-                lista.append(y_pocao)
-                if n%2!=0:
-                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
-                        lista_pocao.append(lista)
-                        posicoes.append(lista)
+                lista = [x_pocao, y_pocao]
+                colidiu = False
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_pocao.append(lista)
+                    posicoes.append(lista)
+            
             for n in range(qtd_bau):
-                if n%2==0:
-                    print('P')
-                    lista=[]
+            
+                lista=[]
                 x_bau = random.randint(50,950)
                 y_bau = random.randint(50,600)
-                lista.append(x_bau)
-                lista.append(y_bau)
-                if n%2!=0:
-                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
-                        lista_bau.append(lista)
-                        posicoes.append(lista)
+                lista = [x_bau, y_bau]
+                colidiu = False
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_bau.append(lista)
+                    posicoes.append(lista)
+            
                     
-            for n in range(qtd_chave*2):
-                if n%2==0:
-                    print('P')
-                    lista=[]
+            for n in range(qtd_chave):
+                lista=[]
                 x_qtd_chave = random.randint(50,950)
                 y_qtd_chave = random.randint(50,600)
-                lista.append(x_qtd_chave)
-                lista.append(y_qtd_chave) 
+                lista = [x_qtd_chave, y_qtd_chave]
                 
-                if n%2!=0:
-                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
-                        lista_chave.append(lista)
-                        posicoes.append(lista)
-                
+                colidiu = False
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_chave.append(lista)
+                    posicoes.append(lista)
+            
         #desenha pocao 
                         
             for n in range(qtd_raio):
-                if n%2==0:
-                    print('P')
-                    lista=[]
+                lista=[]
                 x_qtd_raio = random.randint(50,950)
                 y_qtd_raio = random.randint(50,600)
-                lista.append(x_qtd_raio)
-                lista.append(y_qtd_raio)
-                if n%2!=0:
-                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
-                        lista_raio.append(lista)
-                        posicoes.append(lista)
+                lista = [x_qtd_raio, y_qtd_raio]
+                colidiu = False
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_raio.append(lista)
+                    posicoes.append(lista)
                 
             for n in range(qtd_maca):
-                if n%2==0:
-                    print('P')
-                    lista=[]
+                lista=[]
                 x_qtd_maca = random.randint(50,950)
                 y_qtd_maca = random.randint(50,600)
-                lista.append(x_qtd_maca)
-                lista.append(y_qtd_maca)
-                if n%2!=0:
-                    if abs(lista[0]-lista[2])>100 and abs(lista[1]-lista[3])>100: 
-                        lista_maca.append(lista)
-                        posicoes.append(lista)
+                lista = [x_qtd_maca, y_qtd_maca]
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_maca.append(lista)
+                    posicoes.append(lista)
                 
     #desenha pocao
     if loop%2==0:
