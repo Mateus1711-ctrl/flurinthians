@@ -44,6 +44,7 @@ posicoes=[]
 loop=0  
 texto=''
 passou=False
+relogio = 0
 
 
 def desenha(tela,assets):
@@ -73,6 +74,7 @@ def desenha(tela,assets):
     global qtd_maca
     global texto
     global passou 
+    global relogio
     x=10
    
         
@@ -198,6 +200,9 @@ def desenha(tela,assets):
     primeira=False
 
 def game_loop(tela,assets):
+    global relogio
+    relogio += 1
+    print(relogio)
     global vida
     global loop
     global primeira
@@ -206,7 +211,7 @@ def game_loop(tela,assets):
     global passou
     while game:
         for event in pygame.event.get():
-            print(len(lista_chave))  
+            
             if event.type == pygame.QUIT:
                 pygame.quit()
             if event.type==pygame.MOUSEBUTTONDOWN:
