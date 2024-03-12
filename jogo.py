@@ -48,7 +48,7 @@ ultimo_update = pygame.time.get_ticks()
 
 
 def desenha(tela,assets):
-    fonte=pygame.font.SysFont(None,100)
+    fonte=pygame.font.SysFont(None,85)
 
     tela.fill((255, 255, 255))
     fundo=assets['fundo']
@@ -193,8 +193,10 @@ def desenha(tela,assets):
             tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
         texto=''
     else:
+        chan=fonte.render('Chances:',True,(0,0,0))
+        tela.blit(chan,(300,320))
         tex=fonte.render(texto,True,(0,0,0))
-        tela.blit(tex,(480,320))
+        tela.blit(tex,(570,320))
         pygame.draw.rect(tela,(0,0,255),(300,300,400,100),2)
         
     pygame.display.update()
