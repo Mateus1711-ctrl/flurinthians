@@ -2,9 +2,12 @@ import pygame
 import random
 def inicializa():
     pygame.init()
+    pygame.mixer.init()
     tela = pygame.display.set_mode((1000, 700))
     pygame.display.set_caption('jogo Artur e Mateus')
     assets = {}
+    assets['som_acertou']=pygame.mixer.Sound ('sons/green-screen-efeito-sonoro-acerto.mp3')
+    assets['som_errou']=pygame.mixer.Sound ('sons/efeito-sonoro-de-erro.mp3')
     coracao= pygame.image.load('fotos_pygame/coracao.png')
     assets['coracao'] =pygame.transform.scale(coracao,(50,50))
     assets['pocao']= pygame.image.load('fotos_pygame/pocao.png')
@@ -41,10 +44,14 @@ lista_chave=[]
 lista_raio=[]
 lista_maca=[]
 posicoes=[] 
+dicio=[]
+escolhido=[]
 loop=0  
+sorteado=None
 texto=''
 passou=False
 ultimo_update = pygame.time.get_ticks()
+esco=None
 
 
 def desenha(tela,assets):
@@ -74,7 +81,9 @@ def desenha(tela,assets):
     global qtd_maca
     global texto
     global passou 
-
+    global sorteado
+    global escolhido
+    global esco
     x=10
    
         
@@ -87,26 +96,37 @@ def desenha(tela,assets):
     if primeira:
         if loop==0:
             qtd_chave=random.randint(15,20)
+            escolhido=[['chave',chave]]
         elif loop==1:
             print('tela2')  
             passou=False
         elif loop==2:
-            qtd_chave=random.randint(5,10)
-            qtd_raio=random.randint(5,10)
-            qtd_maca=random.randint(5,10) 
+            qtd_chave=random.randint(15,20)
+            qtd_raio=random.randint(15,20)
+            qtd_maca=random.randint(15,20)
+            escolhido=[['chave',chave],['raio',raio],['maca',maca]]
         elif loop==3:
             print('tela4')
+            passou=False
         elif loop==4:
-            qtd_pocao=random.randint(5,10)
-            qtd_bau=random.randint(5,10)
-            qtd_chave=random.randint(5,10)
-            qtd_raio=random.randint(5,10)
-            qtd_maca=random.randint(5,10)
+            qtd_pocao=random.randint(15,20)
+            qtd_bau=random.randint(15,20)
+            qtd_chave=random.randint(15,20)
+            qtd_raio=random.randint(15,20)
+            qtd_maca=random.randint(15,20)
+            escolhido=[['chave',chave],['raio',raio],['maca',maca],['bau',bau],['pocao',pocao]]
         elif loop==5:
+            passou=False
             print('tela6')   
 
         if loop%2==0:
-            
+            lista_pocao = []
+            lista_bau = []
+            lista_chave = []
+            lista_maca = []
+            lista_raio = []
+            posicoes = []
+            print("-"*30)
             for n in range(qtd_pocao):
                 
                 lista=[]
@@ -120,6 +140,7 @@ def desenha(tela,assets):
                 if not colidiu:
                     lista_pocao.append(lista)
                     posicoes.append(lista)
+                    print(lista, "pocao")
             
             for n in range(qtd_bau):
             
@@ -134,8 +155,22 @@ def desenha(tela,assets):
                 if not colidiu:
                     lista_bau.append(lista)
                     posicoes.append(lista)
+                    print(lista, "bau")
             
-                    
+            for n in range(qtd_raio):
+                lista=[]
+                x_qtd_raio = random.randint(50,950)
+                y_qtd_raio = random.randint(50,600)
+                lista = [x_qtd_raio, y_qtd_raio]
+                colidiu = False
+                for pos in posicoes:
+                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                        colidiu = True
+                if not colidiu:
+                    lista_raio.append(lista)
+                    posicoes.append(lista)
+                    print(lista, "raio")
+
             for n in range(qtd_chave):
                 lista=[]
                 x_qtd_chave = random.randint(50,950)
@@ -149,27 +184,18 @@ def desenha(tela,assets):
                 if not colidiu:
                     lista_chave.append(lista)
                     posicoes.append(lista)
+                    print(lista, "chave")
             
         #desenha pocao 
                         
-            for n in range(qtd_raio):
-                lista=[]
-                x_qtd_raio = random.randint(50,950)
-                y_qtd_raio = random.randint(50,600)
-                lista = [x_qtd_raio, y_qtd_raio]
-                colidiu = False
-                for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
-                        colidiu = True
-                if not colidiu:
-                    lista_raio.append(lista)
-                    posicoes.append(lista)
+            
                 
             for n in range(qtd_maca):
                 lista=[]
                 x_qtd_maca = random.randint(50,950)
                 y_qtd_maca = random.randint(50,600)
                 lista = [x_qtd_maca, y_qtd_maca]
+                colidiu=False
                 for pos in posicoes:
                     if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
                         colidiu = True
@@ -193,8 +219,14 @@ def desenha(tela,assets):
             tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
         texto=''
     else:
+        if primeira:
+            esco=random.randint(0,len(escolhido)-1)
+        arigato=escolhido[esco][0]   
+        imagem=escolhido[esco][1] 
+        dicio={'chave':len(lista_chave),'maca':len(lista_maca),'raio':len(lista_raio),'bau':len(lista_bau),'pocao':len(lista_pocao)}
+        sorteado=dicio[arigato]
         quan=fonte.render('Quantos',True,(0,0,0))
-        tela.blit(chave,(570,220))
+        tela.blit(imagem,(570,220))
         tela.blit(quan,(300,220))
         tex=fonte.render(texto,True,(0,0,0))
         tela.blit(tex,(450,320))
@@ -205,12 +237,14 @@ def desenha(tela,assets):
 
 def game_loop(tela,assets):
     global vida, loop, primeira, texto, lista_chave, passou, ultimo_update
+    game = True
     while game:
         agora = pygame.time.get_ticks()  # Pega o tempo atual do jogo
         for event in pygame.event.get():
-            print(len(lista_chave))  
+            # print(len(lista_chave))  
             if event.type == pygame.QUIT:
-                pygame.quit()
+                game = False
+                
             if event.type == pygame.MOUSEBUTTONDOWN:
                 loop += 1
                 primeira = True
@@ -225,7 +259,7 @@ def game_loop(tela,assets):
                 
                 if passou:
                     primeira = True    
-                if texto.isdigit() and int(texto) == len(lista_chave):  
+                if texto.isdigit() and int(texto) == sorteado:  
                     passou = True
                     
                 if event.key == pygame.K_RETURN:
@@ -236,6 +270,8 @@ def game_loop(tela,assets):
                         primeira = True
                         passou = False  
                         ultimo_update = agora 
+                        assets['som_acertou'].play()
+                        
                     else:
                         print("não foi")
                         loop += 1
@@ -243,8 +279,8 @@ def game_loop(tela,assets):
                         vida -= 1  
                         primeira = True
                         ultimo_update = agora 
-                
-       
+                        assets['som_errou'].play()
+        # print(loop)
         if loop % 2 == 0 and (agora - ultimo_update) >= 4000:  
             loop += 1
             primeira = True
@@ -257,6 +293,7 @@ if __name__ == '__main__':
     tela,assets= inicializa()
     game_loop(tela,assets)
 
+pygame.quit()
 #commit
 
 
