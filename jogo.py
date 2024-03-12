@@ -254,7 +254,7 @@ if __name__ == '__main__':
     tela,assets= inicializa()
     game_loop(tela,assets)
 
-
+#commit
 
 
 
