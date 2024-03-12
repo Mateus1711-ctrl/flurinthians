@@ -193,10 +193,11 @@ def desenha(tela,assets):
             tela.blit(maca,(lista_maca[i][0],lista_maca[i][1]))
         texto=''
     else:
-        chan=fonte.render('Chances:',True,(0,0,0))
-        tela.blit(chan,(300,320))
+        quan=fonte.render('Quantos',True,(0,0,0))
+        tela.blit(chave,(570,220))
+        tela.blit(quan,(300,220))
         tex=fonte.render(texto,True,(0,0,0))
-        tela.blit(tex,(570,320))
+        tela.blit(tex,(450,320))
         pygame.draw.rect(tela,(0,0,255),(300,300,400,100),2)
         
     pygame.display.update()
