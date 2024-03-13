@@ -11,15 +11,15 @@ def inicializa():
     coracao= pygame.image.load('fotos_pygame/coracao.png')
     assets['coracao'] =pygame.transform.scale(coracao,(50,50))
     assets['pocao']= pygame.image.load('fotos_pygame/pocao.png')
-    assets['pocao']=pygame.transform.scale(assets['pocao'],(50,50))
+    assets['pocao']=pygame.transform.scale(assets['pocao'],(35,35))
     assets['bau'] = pygame.image.load('fotos_pygame/bau.png')
-    assets['bau']=pygame.transform.scale(assets['bau'],(50,50))
+    assets['bau']=pygame.transform.scale(assets['bau'],(35,35))
     assets['chave'] = pygame.image.load('fotos_pygame/chave.png')
-    assets['chave']=pygame.transform.scale(assets['chave'],(50,50))
+    assets['chave']=pygame.transform.scale(assets['chave'],(35,35))
     assets['raio'] = pygame.image.load('fotos_pygame/raio.png')
-    assets['raio']=pygame.transform.scale(assets['raio'],(50,50))
+    assets['raio']=pygame.transform.scale(assets['raio'],(35,35))
     assets['maca'] = pygame.image.load('fotos_pygame/maca.png')
-    assets['maca']=pygame.transform.scale(assets['maca'],(50,50))
+    assets['maca']=pygame.transform.scale(assets['maca'],(35,35))
     fundo= pygame.image.load('fotos_pygame/fundo.png')
     assets['fundo']=pygame.transform.scale(fundo,(1000,700))
     assets['vida']=3
@@ -135,7 +135,7 @@ def desenha(tela,assets):
                 lista = [x_pocao, y_pocao]
                 colidiu = False
                 for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                    if abs(lista[0]-pos[0])<30 or abs(lista[1]-pos[1])<30: 
                         colidiu = True
                 if not colidiu:
                     lista_pocao.append(lista)
@@ -150,7 +150,7 @@ def desenha(tela,assets):
                 lista = [x_bau, y_bau]
                 colidiu = False
                 for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                    if abs(lista[0]-pos[0])<30 or abs(lista[1]-pos[1])<30: 
                         colidiu = True
                 if not colidiu:
                     lista_bau.append(lista)
@@ -159,12 +159,12 @@ def desenha(tela,assets):
             
             for n in range(qtd_raio):
                 lista=[]
-                x_qtd_raio = random.randint(50,950)
-                y_qtd_raio = random.randint(50,600)
+                x_qtd_raio = random.randint(30,950)
+                y_qtd_raio = random.randint(30,600)
                 lista = [x_qtd_raio, y_qtd_raio]
                 colidiu = False
                 for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                    if abs(lista[0]-pos[0])<30 or abs(lista[1]-pos[1])<30: 
                         colidiu = True
                 if not colidiu:
                     lista_raio.append(lista)
@@ -173,13 +173,13 @@ def desenha(tela,assets):
 
             for n in range(qtd_chave):
                 lista=[]
-                x_qtd_chave = random.randint(50,950)
-                y_qtd_chave = random.randint(50,600)
+                x_qtd_chave = random.randint(30,950)
+                y_qtd_chave = random.randint(30,600)
                 lista = [x_qtd_chave, y_qtd_chave]
                 
                 colidiu = False
                 for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                    if abs(lista[0]-pos[0])<30 or abs(lista[1]-pos[1])<30: 
                         colidiu = True
                 if not colidiu:
                     lista_chave.append(lista)
@@ -192,12 +192,12 @@ def desenha(tela,assets):
                 
             for n in range(qtd_maca):
                 lista=[]
-                x_qtd_maca = random.randint(50,950)
-                y_qtd_maca = random.randint(50,600)
+                x_qtd_maca = random.randint(30,950)
+                y_qtd_maca = random.randint(30,600)
                 lista = [x_qtd_maca, y_qtd_maca]
                 colidiu=False
                 for pos in posicoes:
-                    if abs(lista[0]-pos[0])<50 or abs(lista[1]-pos[1])<50: 
+                    if abs(lista[0]-pos[0])<30 or abs(lista[1]-pos[1])<30: 
                         colidiu = True
                 if not colidiu:
                     lista_maca.append(lista)
