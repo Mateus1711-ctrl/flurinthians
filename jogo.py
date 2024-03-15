@@ -246,9 +246,7 @@ def game_loop(tela,assets):
                 game = False
                 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                loop += 1
-                primeira = True
-                ultimo_update = agora  
+                pass
               
             elif event.type == pygame.KEYDOWN:
                 
@@ -280,6 +278,8 @@ def game_loop(tela,assets):
                         primeira = True
                         ultimo_update = agora 
                         assets['som_errou'].play()
+                        if vida==0:
+                            game=False
         # print(loop)
         if loop % 2 == 0 and (agora - ultimo_update) >= 4000:  
             loop += 1
